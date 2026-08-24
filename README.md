@@ -1,4 +1,4 @@
-# ghostrager1990 | Projects & Desktop Utilities
+# Stanorius Software | Projects & Desktop Utilities
 
 Welcome to the central repository and landing page for my open-source tools, system utilities, and software experiments. The primary focus is on building lightweight, performant C#/.NET Windows desktop applications designed for performance tuning, workflow automation, and resource management.
 
