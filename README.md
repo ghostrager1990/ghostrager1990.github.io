@@ -27,13 +27,6 @@ Welcome to the central repository and landing page for my open-source tools, sys
 
 ---
 
-### 4. [WalkthroughVault](https://github.com/ghostrager1990/WalkthroughVault)
-* **Category:** Documentation & Reference Manager
-* **Stack:** C#, .NET
-* **Overview:** A local, offline-first notes and guide repository designed to index, search, and quickly surface technical references, game guides, and structured walkthroughs without browser overhead.
-
----
-
 ## 💻 Tech Stack & Interests
 
 * **Languages & Frameworks:** C#, .NET, Win32 Native APIs, WPF / WinForms
