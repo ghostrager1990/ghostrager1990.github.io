@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ghostrager1990 | Developer & Projects</title>
+    <title>ghostrager1990 | Performance Utilities & Dev</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --border-color: #30363d;
-            --accent-color: #58a6ff;
-            --accent-glow: rgba(88, 166, 255, 0.15);
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-heading: #f0f6fc;
+            --bg: #07090e;
+            --card-bg: rgba(18, 22, 34, 0.65);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-hover: rgba(99, 179, 237, 0.4);
+            --text-primary: #f0f6fc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #38bdf8;
+            --accent-blue: #6366f1;
+            --accent-purple: #a855f7;
+            --tag-bg: rgba(56, 189, 248, 0.08);
+            --tag-border: rgba(56, 189, 248, 0.2);
+            --tag-text: #7dd3fc;
         }
 
         * {
@@ -27,213 +32,409 @@
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
             line-height: 1.6;
-            padding: 2.5rem 1.25rem;
+            position: relative;
+            overflow-x: hidden;
+            padding: 4rem 1.5rem 3rem;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .ambient-glow-1 {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            top: 400px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1080px;
             margin: 0 auto;
         }
 
+        /* Header Section */
         header {
-            margin-bottom: 3.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
         }
 
-        .hero-tag {
-            display: inline-block;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            background: var(--accent-glow);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
         }
 
         h1 {
-            font-size: 2.4rem;
-            color: var(--text-heading);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
         }
 
-        .social-links {
-            margin-top: 1.25rem;
+        .cta-group {
             display: flex;
+            align-items: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .social-links a {
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--accent-color);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
             text-decoration: none;
-            border: 1px solid var(--border-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(79, 70, 229, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            backdrop-filter: blur(6px);
             transition: all 0.2s ease;
         }
 
-        .social-links a:hover {
-            background-color: var(--surface-color);
-            border-color: var(--accent-color);
+        .btn-secondary:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.07);
         }
 
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--text-heading);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+        /* Section Title */
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
         }
 
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .section-header .line {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--card-border), transparent);
+        }
+
+        /* Grid & Cards */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 3.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
         }
 
         .card {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.25rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.75rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.15s ease, border-color 0.15s ease;
+            position: relative;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            border-color: #58a6ff66;
+            transform: translateY(-4px);
+            border-color: var(--card-border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.08);
         }
 
-        .card h2 {
-            font-size: 1.15rem;
-            color: var(--text-heading);
-            margin-bottom: 0.5rem;
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--accent-cyan);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.65rem;
         }
 
         .card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
             flex-grow: 1;
         }
 
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
+            gap: 0.45rem;
+            margin-bottom: 1.5rem;
         }
 
         .tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            background: rgba(110, 118, 129, 0.1);
-            color: var(--text-main);
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            border: 1px solid var(--tag-border);
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .card-link {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
-            color: var(--accent-color);
-            text-decoration: none;
             font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s ease, gap 0.2s ease;
         }
 
         .card-link:hover {
-            text-decoration: underline;
+            color: var(--accent-cyan);
+            gap: 0.65rem;
         }
 
+        /* Footer */
         footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            text-align: center;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             font-size: 0.85rem;
             color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-tag {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* SVG Sizing */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
     <div class="container">
         <header>
-            <span class="hero-tag">ghostrager1990</span>
-            <h1>Software, Tools & Open Source</h1>
-            <p>Lightweight Windows utilities, automation tools, and software experiments built for performance and simplicity.</p>
-            <div class="social-links">
-                <a href="https://github.com/ghostrager1990" target="_blank" rel="noopener">GitHub Profile ↗</a>
+            <div class="badge">
+                <span class="pulse-dot"></span>
+                <span>Open Source Projects</span>
+            </div>
+            <h1>ghostrager1990</h1>
+            <p class="subtitle">High-performance Windows desktop utilities, low-level memory flushers, and networking tools engineered with C# and native APIs.</p>
+            <div class="cta-group">
+                <a href="https://github.com/ghostrager1990" class="btn-primary" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    GitHub Profile
+                </a>
             </div>
         </header>
 
         <main>
-            <div class="section-title">Projects & Utilities</div>
+            <div class="section-header">
+                <h2>Featured Repositories</h2>
+                <div class="line"></div>
+            </div>
+
             <div class="projects-grid">
-                <!-- Project Card 1 -->
+                <!-- NetPulseShaper -->
                 <div class="card">
                     <div>
-                        <h2>NetPulseShaper</h2>
-                        <p>Windows desktop utility for monitoring and shaping network traffic profiles with precision.</p>
+                        <div class="card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        <h3>NetPulseShaper</h3>
+                        <p>Windows desktop utility engineered for real-time network throughput shaping, interface monitoring, and traffic stabilization.</p>
                         <div class="tags">
                             <span class="tag">C#</span>
                             <span class="tag">.NET</span>
                             <span class="tag">Networking</span>
                         </div>
                     </div>
-                    <a href="https://github.com/ghostrager1990/NetPulseShaper" class="card-link" target="_blank" rel="noopener">View Repository →</a>
+                    <div class="card-footer">
+                        <a href="https://github.com/ghostrager1990/NetPulseShaper" class="card-link" target="_blank" rel="noopener">
+                            Source Code <span>→</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Project Card 2 -->
+                <!-- PhotonTray -->
                 <div class="card">
                     <div>
-                        <h2>PhotonTray</h2>
-                        <p>Minimalist system tray utility for fast toggles, screen management, and desktop adjustments.</p>
+                        <div class="card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <h3>PhotonTray</h3>
+                        <p>Ultra-low footprint system tray manager providing quick toggles, display adjustments, and swift background controls.</p>
                         <div class="tags">
                             <span class="tag">C#</span>
                             <span class="tag">WPF / WinForms</span>
-                            <span class="tag">Utility</span>
+                            <span class="tag">Tray App</span>
                         </div>
                     </div>
-                    <a href="https://github.com/ghostrager1990/PhotonTray" class="card-link" target="_blank" rel="noopener">View Repository →</a>
+                    <div class="card-footer">
+                        <a href="https://github.com/ghostrager1990/PhotonTray" class="card-link" target="_blank" rel="noopener">
+                            Source Code <span>→</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Project Card 3 -->
+                <!-- RAM-Cleaner-Standby-Purger -->
                 <div class="card">
                     <div>
-                        <h2>RAM-Cleaner-Standby-Purger</h2>
-                        <p>High-efficiency memory cache flusher targeting standby list bloat to optimize gaming and render pipelines.</p>
+                        <div class="card-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        </div>
+                        <h3>RAM-Cleaner-Standby-Purger</h3>
+                        <p>High-efficiency memory cache flusher targeting Windows standby list bloat to eliminate micro-stutters during heavy gaming and rendering.</p>
                         <div class="tags">
                             <span class="tag">C#</span>
                             <span class="tag">Win32 API</span>
-                            <span class="tag">Performance</span>
+                            <span class="tag">Optimization</span>
                         </div>
                     </div>
-                    <a href="https://github.com/ghostrager1990/RAM-Cleaner-Standby-Purger" class="card-link" target="_blank" rel="noopener">View Repository →</a>
+                    <div class="card-footer">
+                        <a href="https://github.com/ghostrager1990/RAM-Cleaner-Standby-Purger" class="card-link" target="_blank" rel="noopener">
+                            Source Code <span>→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
 
         <footer>
-            <p>&copy; 2026 ghostrager1990. Hosted with GitHub Pages.</p>
+            <div class="footer-tag">&copy; 2026 ghostrager1990</div>
+            <div>Powered by GitHub Pages</div>
         </footer>
     </div>
 </body>
