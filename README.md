@@ -27,6 +27,13 @@ Welcome to the central repository and landing page for my open-source tools, sys
 
 ---
 
+### 4. [ShaderPurge](https://github.com/ghostrager1990/ShaderPurge)
+* **Category:** GPU & Graphics Pipeline Optimization
+* **Stack:** C#, .NET 9.0, WPF / WPF-UI, Windows APIs
+* **Overview:** A modern, hardware-aware desktop utility designed to scan, manage, and deep-clean corrupt or bloated GPU driver caches (AMD, NVIDIA, Intel), Direct3D pipeline objects, and game launcher caches. Built to eliminate frametime hitching, texture pop-in, and micro-stutter in demanding 3D workloads.
+
+---
+
 ## 💻 Tech Stack & Interests
 
 * **Languages & Frameworks:** C#, .NET, Win32 Native APIs, WPF / WinForms
